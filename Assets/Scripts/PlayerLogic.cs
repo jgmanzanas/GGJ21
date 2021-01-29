@@ -5,14 +5,27 @@ using UnityEngine;
 public class PlayerLogic : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public Vector3 jump;
+    public float jumpForce = 2.0f;
+    public bool isGrounded;
+    Rigidbody2D rb;
+    void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        jump = new Vector2(0.0f, 2.0f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionStay()
     {
-        
+        isGrounded = true;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
     }
 }

@@ -16,15 +16,8 @@ public class PlayerMovement : MonoBehaviour
         movement = new Vector2(speed, 0);
     }
 
-    // Update is called once per frame
-    /* void Update()
-    {
-        motion = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        transform.Translate(motion * speed * Time.deltaTime);
-    }
-    */
     void FixedUpdate()
     {
-        rb.velocity = movement;
+        transform.position = new Vector3(transform.position.x + 0.1f * speed, transform.position.y, transform.position.z);
     }
 }

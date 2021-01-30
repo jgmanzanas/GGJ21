@@ -15,17 +15,25 @@ public class PlayerLogic : MonoBehaviour
         jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
-    private void OnCollisionStay2D()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "Ground"){
+            isGrounded = true;
+        }
     }
 
-    private void FixedUpdate()
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground"){
+            isGrounded = false;
+        }
+    }
+
+    private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false;
         }
     }
 }

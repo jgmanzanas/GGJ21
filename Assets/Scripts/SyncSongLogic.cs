@@ -142,7 +142,7 @@ public class SyncSongLogic : MonoBehaviour
     private void createEnemies(int selection)
     {
         Vector3 enemyPosition = new Vector3(
-            Screen.width + + cameraScript.speed,
+            Screen.width + cameraScript.speed,
             Screen.height / 3 - 15,
             5
         );
@@ -220,8 +220,11 @@ public class SyncSongLogic : MonoBehaviour
             // so we will schedule it now in order for the system to have enough time
             // to prepare the playback at the specified time. This may involve opening
             // buffering a streamed file and should therefore take any worst-case delay into account.
-            audioSources[flip].clip = clips[flip];
-            audioSources[flip].PlayScheduled(nextEventTime);
+            if (clips.Length == 2)
+            {
+                audioSources[flip].clip = clips[flip];
+                audioSources[flip].PlayScheduled(nextEventTime);
+            }
 
             // Place the next event 16 beats from here at a rate of 140 beats per minute
             nextEventTime += (60.0f / bpm) * numBeatsPerSegment;

@@ -7,7 +7,7 @@ public class CameraLogic : MonoBehaviour
     public float speed = 2;
     private bool running = false;
     private Vector3 startingPosition;
-    private float endGame = 100;
+    public float endGame = 100;
     public GameObject pedestal;
     private GameObject player;
 

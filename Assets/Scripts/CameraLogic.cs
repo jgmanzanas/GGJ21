@@ -13,6 +13,7 @@ public class CameraLogic : MonoBehaviour
     private GameObject player;
 public Image Ganar;
 public Text Win;
+public GameObject panel;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public Text Win;
             gameObject.transform.position.y,
             gameObject.transform.position.z
         );
+panel.gameObject.SetActive(false);
     }
 
 
@@ -36,9 +38,13 @@ public Text Win;
         if (pedestalInstanciated)
         {
             Win.enabled = true;
-Ganar.enabled = true;
-StartCoroutine(waitThreeSeconds());
-            return;
+            Ganar.enabled = true;
+		
+		Debug.Log("Heganau");
+            
+		StartCoroutine(waitEnd());
+	Debug.Log("posno");
+            //return;
         }
         else if (transform.position.x >= startingPosition.x + endGame)
         {
@@ -63,4 +69,11 @@ StartCoroutine(waitThreeSeconds());
         yield return new WaitForSeconds(3);
         running = true;
     }
+    IEnumerator waitEnd() {
+	StartCoroutine(waitThreeSeconds());
+        yield return new WaitForSeconds(3);
+	panel.gameObject.SetActive(true);
+
+    }
+
 }

@@ -11,4 +11,8 @@ public class CambiarMenuses : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void Volver()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

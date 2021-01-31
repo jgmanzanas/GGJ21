@@ -13,8 +13,8 @@ public class PlayerLogic : MonoBehaviour
     public float jumpForce = 2.0f;
     public bool isGrounded;
 
-    public BoxCollider2D noteRed;
-    public BoxCollider2D noteBlue;
+    public Rigidbody2D noteRed;
+    public Rigidbody2D noteBlue;
     public float speed = 2;
     public string[] enemyTags = {"RedEnemy", "BlueEnemy", "PurpleEnemy"};
 
@@ -27,12 +27,15 @@ public class PlayerLogic : MonoBehaviour
 
 	public Image[] corasones;
 	public Text scorecillo;
+	public Text scoreGood;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
         rotation = transform.rotation;
+	lives = 3;
+	score = 0;
     }
 
     public void addScore(int enemyScore)
@@ -40,6 +43,7 @@ public class PlayerLogic : MonoBehaviour
         score += enemyScore;
         Debug.Log("User score: " + score);
 	scorecillo.text = "Score: "+ score;
+	scoreGood.text = ""+ score;
     }
 
     IEnumerator waitThreeSeconds() {
@@ -49,7 +53,7 @@ public class PlayerLogic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-	Debug.Log(collision.object.tag);
+	//Debug.Log(collision.object.tag);
 
         if (collision.gameObject.tag == "Ground"){
             isGrounded = true;
@@ -101,16 +105,12 @@ public class PlayerLogic : MonoBehaviour
             alreadyAttacking = (bool) GameObject.FindGameObjectWithTag("Attack");
             if (!alreadyAttacking)
             {
-                BoxCollider2D bc = Instantiate(
-                    noteRed, transform.position + projectileOffset, transform.rotation,
-                    this.gameObject.transform
-                );
-            }
-            /*
-            Rigidbody2D nt = Instantiate(
+            
+            	Rigidbody2D nt = Instantiate(
                 noteRed, transform.position + projectileOffset, transform.rotation
-            );
-            */
+            	);
+		nt.velocity = new Vector2(4 * speed, 0.0f);
+            }
             // Multiply by 2 times the speed on the camera
             // nt.velocity = new Vector2(4 * speed, 0.0f);
         }
@@ -120,16 +120,12 @@ public class PlayerLogic : MonoBehaviour
             alreadyAttacking = (bool) GameObject.FindGameObjectWithTag("Attack");
             if (!alreadyAttacking)
             {
-                BoxCollider2D bc = Instantiate(
-                    noteBlue, transform.position + projectileOffset, transform.rotation,
-                    this.gameObject.transform
-                );
-            }
-            /*
-            Rigidbody2D nt = Instantiate(
+                Rigidbody2D nt = Instantiate(
                 noteBlue, transform.position + projectileOffset, transform.rotation
-            );
-            */
+            	);
+		nt.velocity = new Vector2(4 * speed, 0.0f);
+            }
+            
             // Multiply by 2 times the speed on the camera
             // nt.velocity = new Vector2(4 * speed, 0.0f);
         }

@@ -5,26 +5,54 @@ using UnityEngine;
 public class CameraLogic : MonoBehaviour
 {
     public float speed = 2;
-    // private int bpm = 100;
-    private Vector2 movement;
     private bool running = false;
-    GameObject floor;
+    private Vector3 startingPosition;
+    private float endGame = 100;
+    public GameObject pedestal;
+    private GameObject player;
 
     void Start()
     {
+        player = GameObject.Find("Player");
+        startingPosition = new Vector3(
+            gameObject.transform.position.x,
+            gameObject.transform.position.y,
+            gameObject.transform.position.z
+        );
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
+        GameObject pedestalInstanciated = GameObject.Find("Pedestal(Clone)");
         if (!running)
         {
             StartCoroutine(waitThreeSeconds());
             return;
         }
-        transform.position = new Vector3(
-            transform.position.x + 0.1f * speed, transform.position.y, transform.position.z
-        );
+        if (pedestalInstanciated)
+        {
+            StartCoroutine(waitThreeSeconds());
+            return;
+        }
+        else if (transform.position.x >= startingPosition.x + endGame)
+        {
+            speed = 0;
+            Instantiate(
+                pedestal, new Vector3(
+                    player.transform.position.x + 1,
+                    player.transform.position.y,
+                    player.transform.position.z
+                ), Quaternion.identity
+            );
+            Application.Quit();
+        }
+        else
+        {
+            transform.position = new Vector3(
+                transform.position.x + 0.1f * speed, transform.position.y, transform.position.z
+            );
+        }
     }
     IEnumerator waitThreeSeconds() {
         yield return new WaitForSeconds(3);

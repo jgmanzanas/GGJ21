@@ -16,7 +16,7 @@ public class PlayerLogic : MonoBehaviour
     public float speed = 2;
     public string[] enemyTags = {"RedEnemy", "BlueEnemy", "PurpleEnemy"};
 
-    private Vector3 projectileOffset = new Vector3(1, 0, 0);
+    private Vector3 projectileOffset = new Vector3(3, 0, 0);
     private Quaternion rotation;
     private bool running = false;
     Rigidbody2D rb;

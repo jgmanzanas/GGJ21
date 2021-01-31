@@ -6,11 +6,13 @@ public class EnemiesLogic : MonoBehaviour
 {
     // Start is called before the first frame update
     public int lives = 1;
+    public float TimeToLive = 5f;
     BoxCollider2D boxCollider;
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        Destroy(gameObject, TimeToLive);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -17,7 +17,6 @@ public class SyncSongLogic : MonoBehaviour
     public int numBeatsPerSegment = 16;
     public AudioClip[] clips = new AudioClip[2];
     public GameObject child;
-    public float cameraSpeed;
     public string difficulty = "Normal";
     public BoxCollider2D enemyRed;
     public BoxCollider2D enemyBlue;
@@ -32,6 +31,8 @@ public class SyncSongLogic : MonoBehaviour
     private bool running = false;
     private float startpos;
     private int maxRange = 3;
+    private GameObject mainCamera;
+    private CameraLogic cameraScript;
 
     private void createEnemiesNormal(int selection, Vector3 enemyWorldPosition)
     {
@@ -58,7 +59,7 @@ public class SyncSongLogic : MonoBehaviour
     private void createEnemiesHard(int selection, Vector3 enemyWorldPosition)
     {
         Vector3 enemyPosition2 = new Vector3(
-            Screen.width + cameraSpeed + 100,
+            Screen.width + cameraScript.speed + 100,
             Screen.height / 2 + 8,
             10
         );
@@ -141,9 +142,9 @@ public class SyncSongLogic : MonoBehaviour
     private void createEnemies(int selection)
     {
         Vector3 enemyPosition = new Vector3(
-            Screen.width + cameraSpeed,
-            Screen.height / 2 + 8,
-            10
+            Screen.width + + cameraScript.speed,
+            Screen.height / 3 - 15,
+            5
         );
         Vector3 enemyWorldPosition = cam.ScreenToWorldPoint(enemyPosition);
 
@@ -168,12 +169,17 @@ public class SyncSongLogic : MonoBehaviour
             difficulty = "Normal";
             maxRange = 3;
         }
+
+        mainCamera = GameObject.Find("Main Camera");
+        cameraScript = mainCamera.GetComponent<CameraLogic>();
+
+
         for (int i = 0; i < 2; i++)
         {
             // GameObject child = new GameObject("Player");
             cam = Camera.main;
             startpos = gameObject.transform.position.x;
-            Vector3 cameraOffset = new Vector3(cameraSpeed, 0, 0);
+            Vector3 cameraOffset = new Vector3(cameraScript.speed, 0, 0);
             child.transform.parent = gameObject.transform;
             audioSources[i] = child.AddComponent<AudioSource>();
         }
@@ -183,10 +189,26 @@ public class SyncSongLogic : MonoBehaviour
         running = true;
     }
 
+    IEnumerator waitThreeSeconds() {
+        yield return new WaitForSeconds(3);
+        running = true;
+    }
+
+    IEnumerator waitTonsOfSeconds() {
+        yield return new WaitForSeconds(1000000);
+        running = true;
+    }
+
     void Update()
     {
         if (!running)
         {
+            StartCoroutine(waitThreeSeconds());
+            return;
+        }
+        if(cameraScript.speed == 0)
+        {
+            StartCoroutine(waitTonsOfSeconds());
             return;
         }
 

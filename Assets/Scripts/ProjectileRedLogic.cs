@@ -7,7 +7,7 @@ public class ProjectileRedLogic : MonoBehaviour
     public float TimeToLive = 5f;
     private void Start()
     {
-        Destroy(gameObject, TimeToLive);
+        Destroy(this.gameObject, TimeToLive);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -15,11 +15,15 @@ public class ProjectileRedLogic : MonoBehaviour
         if (collision.collider.gameObject.tag == "RedEnemy")
         {
             Destroy(collision.collider.gameObject);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
-        else
+        else if (
+            collision.collider.gameObject.tag == "BlueEnemy"
+            ||
+            collision.collider.gameObject.tag == "PurpleEnemy"
+        )
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

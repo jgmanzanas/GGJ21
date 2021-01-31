@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Moni/Menu.unity
+    guid: 561a4f2840cd4ae4abbcb0dbd7abbd5f
+  - enabled: 1
+    path: Assets/Manza/ManzaScene.unity
+    guid: 93e6543605cd126408b6ae67facc43c0
   m_configObjects: {}

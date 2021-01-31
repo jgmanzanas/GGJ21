@@ -11,14 +11,16 @@ public class PlayerLogic : MonoBehaviour
     public float jumpForce = 2.0f;
     public bool isGrounded;
 
-    public Rigidbody2D noteRed;
-    public Rigidbody2D noteBlue;
+    public BoxCollider2D noteRed;
+    public BoxCollider2D noteBlue;
     public float speed = 2;
     public string[] enemyTags = {"RedEnemy", "BlueEnemy", "PurpleEnemy"};
 
-    private Vector3 projectileOffset = new Vector3(3, 0, 0);
+    private Vector3 projectileOffset = new Vector3(1, 0, 0);
     private Quaternion rotation;
+    private int score;
     private bool running = false;
+    private bool alreadyAttacking = false;
     Rigidbody2D rb;
 
     void Start()
@@ -26,6 +28,12 @@ public class PlayerLogic : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
         rotation = transform.rotation;
+    }
+
+    public void addScore(int enemyScore)
+    {
+        score += enemyScore;
+        Debug.Log("User score: " + score);
     }
 
     IEnumerator waitThreeSeconds() {
@@ -70,7 +78,6 @@ public class PlayerLogic : MonoBehaviour
             // Debug.Log("No lives");
             Application.Quit();
         }
-
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
@@ -78,16 +85,40 @@ public class PlayerLogic : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.L))
         {
-            Rigidbody2D nt = Instantiate(noteRed, transform.position + projectileOffset, transform.rotation);
+            alreadyAttacking = (bool) GameObject.FindGameObjectWithTag("Attack");
+            if (!alreadyAttacking)
+            {
+                BoxCollider2D bc = Instantiate(
+                    noteRed, transform.position + projectileOffset, transform.rotation,
+                    this.gameObject.transform
+                );
+            }
+            /*
+            Rigidbody2D nt = Instantiate(
+                noteRed, transform.position + projectileOffset, transform.rotation
+            );
+            */
             // Multiply by 2 times the speed on the camera
-            nt.velocity = new Vector2(4 * speed, 0.0f);
+            // nt.velocity = new Vector2(4 * speed, 0.0f);
         }
 
         else if(Input.GetKeyDown(KeyCode.K))
         {
-            Rigidbody2D nt = Instantiate(noteBlue, transform.position + projectileOffset, transform.rotation);
+            alreadyAttacking = (bool) GameObject.FindGameObjectWithTag("Attack");
+            if (!alreadyAttacking)
+            {
+                BoxCollider2D bc = Instantiate(
+                    noteBlue, transform.position + projectileOffset, transform.rotation,
+                    this.gameObject.transform
+                );
+            }
+            /*
+            Rigidbody2D nt = Instantiate(
+                noteBlue, transform.position + projectileOffset, transform.rotation
+            );
+            */
             // Multiply by 2 times the speed on the camera
-            nt.velocity = new Vector2(4 * speed, 0.0f);
+            // nt.velocity = new Vector2(4 * speed, 0.0f);
         }
 
     }

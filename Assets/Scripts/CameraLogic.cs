@@ -40,10 +40,10 @@ public class CameraLogic : MonoBehaviour
             speed = 0;
             Instantiate(
                 pedestal, new Vector3(
-                    player.transform.position.x + 1,
+                    player.transform.position.x + 4,
                     player.transform.position.y,
                     player.transform.position.z
-                ), Quaternion.identity
+                ), transform.rotation, player.transform
             );
             Application.Quit();
         }

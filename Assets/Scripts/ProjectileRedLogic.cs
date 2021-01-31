@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileRedLogic : MonoBehaviour
 {
     public float TimeToLive = 5f;
+    private EnemiesLogic enemiesScript;
     private void Start()
     {
         Destroy(this.gameObject, TimeToLive);
@@ -14,7 +15,9 @@ public class ProjectileRedLogic : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "RedEnemy")
         {
-            Destroy(collision.collider.gameObject);
+            enemiesScript = collision.collider.gameObject.GetComponent<EnemiesLogic>();
+            enemiesScript.lives -= 1;
+            // Destroy(collision.collider.gameObject);
             Destroy(this.gameObject);
         }
         else if (

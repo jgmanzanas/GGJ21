@@ -7,18 +7,26 @@ public class EnemiesLogic : MonoBehaviour
     // Start is called before the first frame update
     public int lives = 1;
     public float TimeToLive = 5f;
+
+    public int score = 10;
+
     BoxCollider2D boxCollider;
+
+    private GameObject player;
+    private PlayerLogic playerScript;
 
     void Start()
     {
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<PlayerLogic>();
         boxCollider = GetComponent<BoxCollider2D>();
-        Destroy(gameObject, TimeToLive);
+        Destroy(this.gameObject, TimeToLive);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player"){
-            lives -= 1;
+            Destroy(boxCollider);
         }
     }
 
@@ -28,7 +36,8 @@ public class EnemiesLogic : MonoBehaviour
     {
         if (lives == 0)
         {
-            boxCollider.enabled = false;
+            Destroy(this.gameObject);
+            playerScript.addScore(score);
         }
     }
 }

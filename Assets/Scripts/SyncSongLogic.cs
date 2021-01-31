@@ -45,13 +45,13 @@ public class SyncSongLogic : MonoBehaviour
         else if (selection == 1)
         {
             Instantiate(
-                enemyBlue, enemyWorldPosition, transform.rotation
+                enemyBlue, enemyWorldPosition + new Vector3(0, 1, 0), transform.rotation
             );
         }
         else if (selection == 2)
         {
             Instantiate(
-                enemyPurple, enemyWorldPosition, transform.rotation
+                enemyPurple, enemyWorldPosition - new Vector3(0, 1f, 0), transform.rotation
             );
         }
     }
@@ -71,13 +71,13 @@ public class SyncSongLogic : MonoBehaviour
                 enemyRed, enemyWorldPosition, transform.rotation
             );
             Instantiate(
-                enemyBlue, enemyWorldPosition2, transform.rotation
+                enemyBlue, enemyWorldPosition2 + new Vector3(0, 1, 0), transform.rotation
             );
         }
         else if (selection == 4)
         {
             Instantiate(
-                enemyBlue, enemyWorldPosition, transform.rotation
+                enemyBlue, enemyWorldPosition + new Vector3(0, 1, 0), transform.rotation
             );
             Instantiate(
                 enemyRed, enemyWorldPosition2, transform.rotation
@@ -86,7 +86,7 @@ public class SyncSongLogic : MonoBehaviour
         else if (selection == 5)
         {
             Instantiate(
-                enemyPurple, enemyWorldPosition, transform.rotation
+                enemyPurple, enemyWorldPosition - new Vector3(0, 0.5f, 0), transform.rotation
             );
             Instantiate(
                 enemyRed, enemyWorldPosition2, transform.rotation
@@ -98,7 +98,7 @@ public class SyncSongLogic : MonoBehaviour
                 enemyRed, enemyWorldPosition, transform.rotation
             );
             Instantiate(
-                enemyPurple, enemyWorldPosition2, transform.rotation
+                enemyPurple, enemyWorldPosition2 - new Vector3(0, 0.5f, 0), transform.rotation
             );
         }
         else if (selection == 7)
@@ -107,7 +107,7 @@ public class SyncSongLogic : MonoBehaviour
                 enemyPurple, enemyWorldPosition, transform.rotation
             );
             Instantiate(
-                enemyBlue, enemyWorldPosition2, transform.rotation
+                enemyBlue, enemyWorldPosition2+ new Vector3(0, 1, 0), transform.rotation
             );
         }
         else if (selection == 8)
@@ -122,19 +122,19 @@ public class SyncSongLogic : MonoBehaviour
         else if (selection == 9)
         {
             Instantiate(
-                enemyBlue, enemyWorldPosition, transform.rotation
+                enemyBlue, enemyWorldPosition + new Vector3(0, 1, 0), transform.rotation
             );
             Instantiate(
-                enemyPurple, enemyWorldPosition2, transform.rotation
+                enemyPurple, enemyWorldPosition2 - new Vector3(0, 0.5f, 0), transform.rotation
             );
         }
         else if (selection == 10)
         {
             Instantiate(
-                enemyBlue, enemyWorldPosition, transform.rotation
+                enemyBlue, enemyWorldPosition + new Vector3(0, 1, 0), transform.rotation
             );
             Instantiate(
-                enemyBlue, enemyWorldPosition2, transform.rotation
+                enemyBlue, enemyWorldPosition2 + new Vector3(0, 1, 0), transform.rotation
             );
         }
     }

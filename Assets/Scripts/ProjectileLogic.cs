@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileBlueLogic : MonoBehaviour
+public class ProjectileLogic : MonoBehaviour
 {
     public float TimeToLive = 5f;
     private void Start()

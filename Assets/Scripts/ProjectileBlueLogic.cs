@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileLogic : MonoBehaviour
+public class ProjectileBlueLogic : MonoBehaviour
 {
     public float TimeToLive = 5f;
+    private EnemiesLogic enemiesScript;
     private void Start()
     {
         Destroy(this.gameObject, TimeToLive);
@@ -14,7 +15,8 @@ public class ProjectileLogic : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "BlueEnemy")
         {
-            Destroy(collision.collider.gameObject);
+            enemiesScript = collision.collider.gameObject.GetComponent<EnemiesLogic>();
+            enemiesScript.lives -= 1;
             Destroy(this.gameObject);
         }
         else if (

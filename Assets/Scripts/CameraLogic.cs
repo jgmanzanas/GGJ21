@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraLogic : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class CameraLogic : MonoBehaviour
     public float endGame = 100;
     public GameObject pedestal;
     private GameObject player;
+public Image Ganar;
+public Text Win;
 
     void Start()
     {
@@ -32,7 +35,9 @@ public class CameraLogic : MonoBehaviour
         }
         if (pedestalInstanciated)
         {
-            StartCoroutine(waitThreeSeconds());
+            Win.enabled = true;
+Ganar.enabled = true;
+StartCoroutine(waitThreeSeconds());
             return;
         }
         else if (transform.position.x >= startingPosition.x + endGame)

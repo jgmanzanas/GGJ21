@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Manza/ManzaScene.unity
     guid: 93e6543605cd126408b6ae67facc43c0
+  - enabled: 1
+    path: Assets/Scenes/FEnElChat.unity
+    guid: 4af04953be063d847972df1a3860b39c
   m_configObjects: {}

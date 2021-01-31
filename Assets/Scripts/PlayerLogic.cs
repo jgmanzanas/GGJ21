@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerLogic : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class PlayerLogic : MonoBehaviour
     private bool alreadyAttacking = false;
     Rigidbody2D rb;
 
+	public Image[] corasones;
+	public Text scorecillo;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +39,7 @@ public class PlayerLogic : MonoBehaviour
     {
         score += enemyScore;
         Debug.Log("User score: " + score);
+	scorecillo.text = "Score: "+ score;
     }
 
     IEnumerator waitThreeSeconds() {
@@ -43,12 +49,19 @@ public class PlayerLogic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+	Debug.Log(collision.object.tag);
+
         if (collision.gameObject.tag == "Ground"){
             isGrounded = true;
         }
         else if(enemyTags.Contains(collision.gameObject.tag))
         {
+	
             lives -= 1;
+		corasones[lives].enabled = false;
+		if( lives == 0){
+			SceneManager.LoadScene(2);
+		}
         }
     }
 
